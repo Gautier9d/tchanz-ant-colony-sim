@@ -1,9 +1,4 @@
-# Prerequisites
-*.d
-
 # Compiled Object files
-*.slo
-*.lo
 *.o
 *.obj
 
@@ -11,20 +6,10 @@
 *.gch
 *.pch
 
-# Linker files
-*.ilk
-
-# Debugger Files
-*.pdb
-
 # Compiled Dynamic libraries
 *.so
 *.dylib
 *.dll
-
-# Fortran module files
-*.mod
-*.smod
 
 # Compiled Static libraries
 *.lai
@@ -36,6 +21,74 @@
 *.exe
 *.out
 *.app
+projet
+prog
 
-# debug information files
-*.dwo
+# Build directories
+build/
+bin/
+obj/
+Debug/
+Release/
+
+# IDE specific files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+*.sublime-*
+
+# Backup files
+*.bak
+*.backup
+*.old
+
+# Core dumps
+core
+*.core
+
+# Test coverage
+*.gcov
+*.gcda
+*.gcno
+coverage/
+*.info
+
+# Documentation generation
+docs/html/
+docs/latex/
+*.doxygen
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Archive files (except in releases/)
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# Student submission files (if not needed)
+SCIPER*.zip
+
+# Log files
+*.log
+
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# CLion
+.idea/
+cmake-build-*/
+
+# Backup executables from screenshots
+*.exe.backup
+deo/

@@ -1,21 +1,68 @@
-MIT License
+ACADEMIC SOFTWARE LICENSE
+Tchanz Ant Simulation Project
 
-Copyright (c) 2025 Gautier9d
+Copyright (c) 2021-2022 École Polytechnique Fédérale de Lausanne (EPFL)
+All rights reserved.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+Developed by students as part of the Computer Science curriculum at EPFL.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+1. DEFINITIONS
+   "Software" refers to the Tchanz Ant Simulation project and all associated
+   source code, documentation, and test files.
+   
+   "Academic Use" means use for teaching, learning, academic research, and
+   other non-commercial scholarly purposes.
+
+2. GRANT OF LICENSE
+   Permission is hereby granted, free of charge, to any person obtaining a
+   copy of this Software for Academic Use, to use, copy, modify, merge, and
+   distribute the Software, subject to the following conditions:
+
+3. CONDITIONS
+   a) The Software may only be used for Academic Use. Commercial use is
+      strictly prohibited without explicit written permission from EPFL.
+   
+   b) Redistributions of source code must retain this license notice,
+      the copyright notice, and acknowledgment of EPFL and the original
+      authors.
+   
+   c) Redistributions in binary form must reproduce the above copyright
+      notice and this license in the documentation.
+   
+   d) Any academic publication or presentation using this Software must
+      cite the original project and acknowledge EPFL.
+   
+   e) Modified versions must be clearly marked as such and must not be
+      misrepresented as the original Software.
+
+4. ACADEMIC INTEGRITY
+   This Software is provided for educational purposes. Users must:
+   - Not submit this code as their own work for academic credit
+   - Properly cite this project when used as a reference
+   - Comply with their institution's academic integrity policies
+
+5. DISCLAIMER
+   THIS SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+   OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+   EPFL, THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+   OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+   ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+   OTHER DEALINGS IN THE SOFTWARE.
+
+6. ATTRIBUTION
+   Any use of this Software must include the following attribution:
+   "Based on the Tchanz Ant Simulation project developed at École Polytechnique
+   Fédérale de Lausanne (EPFL) as part of the Computer Science curriculum."
+
+7. CONTACT
+   For permissions beyond the scope of this license, please contact:
+   Computer Science Department
+   École Polytechnique Fédérale de Lausanne
+   Station 14
+   CH-1015 Lausanne
+   Switzerland
+
+END OF LICENSE

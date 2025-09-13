@@ -1,0 +1,182 @@
+# Makefile for Tchanz Ant Simulation Project
+# EPFL - Computer Science Department
+
+# Compiler and flags
+CXX = g++
+CXXFLAGS = -Wall -Wextra -std=c++11 -pedantic
+LDFLAGS = `pkg-config --cflags gtkmm-3.0`
+LDLIBS = `pkg-config --libs gtkmm-3.0`
+
+# Build configuration (can be overridden)
+BUILD_TYPE ?= release
+
+ifeq ($(BUILD_TYPE),debug)
+    CXXFLAGS += -g -O0 -DDEBUG
+else
+    CXXFLAGS += -O3 -DNDEBUG
+endif
+
+# Directories
+SRCDIR = src
+OBJDIR = build
+BINDIR = bin
+TESTDIR = tests
+
+# Main directories within src
+COREDIR = $(SRCDIR)/core
+ENTITYDIR = $(SRCDIR)/entities
+GUIDIR = $(SRCDIR)/gui
+UTILDIR = $(SRCDIR)/utils
+MAINDIR = $(SRCDIR)/main
+INCDIR = $(SRCDIR)/include
+
+# Output executable
+TARGET = projet
+BINARY = $(BINDIR)/$(TARGET)
+
+# Source files
+MAIN_SRC = $(MAINDIR)/projet.cc
+
+CORE_SRC = $(COREDIR)/simulation.cc \
+           $(COREDIR)/fourmiliere.cc \
+           $(COREDIR)/nourriture.cc
+
+ENTITY_SRC = $(ENTITYDIR)/fourmis.cc \
+             $(ENTITYDIR)/collector.cc \
+             $(ENTITYDIR)/defensor.cc \
+             $(ENTITYDIR)/predator.cc \
+             $(ENTITYDIR)/generator.cc
+
+GUI_SRC = $(GUIDIR)/gui.cc \
+          $(GUIDIR)/graphic.cc
+
+UTIL_SRC = $(UTILDIR)/squarecell.cc \
+           $(UTILDIR)/message.cc \
+           $(UTILDIR)/error_squarecell.cc
+
+ALL_SRC = $(MAIN_SRC) $(CORE_SRC) $(ENTITY_SRC) $(GUI_SRC) $(UTIL_SRC)
+
+# Object files
+ALL_OBJ = $(patsubst $(SRCDIR)/%.cc,$(OBJDIR)/%.o,$(ALL_SRC))
+
+# Header dependencies
+DEPS = $(ALL_OBJ:.o=.d)
+
+# Include paths
+INCLUDES = -I$(INCDIR) -I$(COREDIR) -I$(ENTITYDIR) -I$(GUIDIR) -I$(UTILDIR)
+
+# Default target
+.PHONY: all
+all: directories $(TARGET)
+
+# Create necessary directories
+.PHONY: directories
+directories:
+	@mkdir -p $(OBJDIR)/{core,entities,gui,utils,main}
+	@mkdir -p $(BINDIR)
+
+# Main target
+$(TARGET): $(ALL_OBJ)
+	@echo "Linking $@..."
+	@$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ $^ $(LDLIBS)
+	@cp $(TARGET) $(BINARY)
+	@echo "Build complete: $(TARGET)"
+
+# Pattern rule for object files
+$(OBJDIR)/%.o: $(SRCDIR)/%.cc
+	@echo "Compiling $<..."
+	@$(CXX) $(CXXFLAGS) $(INCLUDES) $(LDFLAGS) -MMD -c $< -o $@
+
+# Include dependencies
+-include $(DEPS)
+
+# Clean build files
+.PHONY: clean
+clean:
+	@echo "Cleaning build files..."
+	@rm -rf $(OBJDIR)
+	@rm -f $(TARGET) $(BINARY)
+	@rm -f *.o *.d
+	@echo "Clean complete"
+
+# Full clean (including generated files)
+.PHONY: distclean
+distclean: clean
+	@echo "Removing all generated files..."
+	@rm -rf $(BINDIR)
+	@rm -f *.gch
+	@rm -f core
+	@rm -f *.backup
+
+# Run tests
+.PHONY: test
+test: $(TARGET)
+	@echo "Running tests..."
+	@./scripts/test.sh
+
+# Format code
+.PHONY: format
+format:
+	@echo "Formatting code..."
+	@find $(SRCDIR) -name "*.cc" -o -name "*.h" | xargs clang-format -i
+
+# Check code formatting
+.PHONY: check-format
+check-format:
+	@echo "Checking code format..."
+	@find $(SRCDIR) -name "*.cc" -o -name "*.h" | xargs clang-format --dry-run --Werror
+
+# Static analysis
+.PHONY: analyze
+analyze:
+	@echo "Running static analysis..."
+	@cppcheck --enable=all --quiet --error-exitcode=1 $(SRCDIR)
+
+# Memory check
+.PHONY: memcheck
+memcheck: $(TARGET)
+	@echo "Running memory check..."
+	@valgrind --leak-check=full --show-leak-kinds=all ./$(TARGET) tests/data/f01.txt
+
+# Generate documentation
+.PHONY: docs
+docs:
+	@echo "Generating documentation..."
+	@doxygen Doxyfile
+
+# Install (copy to system location)
+.PHONY: install
+install: $(TARGET)
+	@echo "Installing $(TARGET)..."
+	@install -m 755 $(TARGET) /usr/local/bin/
+
+# Help target
+.PHONY: help
+help:
+	@echo "Tchanz Ant Simulation - Makefile targets:"
+	@echo "  all          - Build the project (default)"
+	@echo "  clean        - Remove build files"
+	@echo "  distclean    - Remove all generated files"
+	@echo "  test         - Run test suite"
+	@echo "  format       - Format source code"
+	@echo "  check-format - Check code formatting"
+	@echo "  analyze      - Run static analysis"
+	@echo "  memcheck     - Check for memory leaks"
+	@echo "  docs         - Generate documentation"
+	@echo "  install      - Install to system"
+	@echo "  help         - Show this help message"
+	@echo ""
+	@echo "Build options:"
+	@echo "  make BUILD_TYPE=debug   - Build with debug symbols"
+	@echo "  make BUILD_TYPE=release - Build with optimizations (default)"
+
+# Dependency for all object files on Makefile changes
+$(ALL_OBJ): Makefile
+
+.PHONY: debug
+debug:
+	@$(MAKE) BUILD_TYPE=debug
+
+.PHONY: release
+release:
+	@$(MAKE) BUILD_TYPE=release
